@@ -52,18 +52,18 @@ Contexts encapsulate different scopes so that you can toggle quickly between the
 | Key | Action |
 | :--- | :--- |
 | <kbd>?</kbd> | Toggle help overlay |
-| <kbd>ctrl+c</kbd> | Quit |
+| <kbd>ctrl</kbd> <kbd>c</kbd> | Quit |
 | <kbd>↑</kbd>/<kbd>↓</kbd> or <kbd>j</kbd>/<kbd>k</kbd> | Navigate / scroll |
 | <kbd>tab</kbd> | Cycle focus between tiles |
-| <kbd>shift+tab</kbd> | Switch context |
+| <kbd>shift</kbd> <kbd>tab</kbd> | Switch context |
 | <kbd>enter</kbd> | Select / expand tile |
 | <kbd>esc</kbd> | Back / collapse / unfocus |
 | <kbd>r</kbd> | Refresh logs |
 | <kbd>h</kbd> | Home (dashboard) |
 | <kbd>q</kbd> | Query editor |
-| <kbd>cmd+,</kbd> | Settings |
-| <kbd>shift+enter</kbd> | Submit query |
-| <kbd>ctrl+s</kbd> | Save (in settings/query) |
+| <kbd>cmd</kbd> <kbd>,</kbd> | Settings |
+| <kbd>shift</kbd> <kbd>enter</kbd> | Submit query |
+| <kbd>ctrl</kbd> <kbd>s</kbd> | Save (in settings/query) |
 
 ## Costs
 
