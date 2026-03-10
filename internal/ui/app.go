@@ -8,14 +8,14 @@ import (
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	xaws "github.com/owen/xatu/internal/aws"
-	"github.com/owen/xatu/internal/config"
-	logpkg "github.com/owen/xatu/internal/log"
-	"github.com/owen/xatu/internal/ui/query"
-	"github.com/owen/xatu/internal/ui/settings"
-	"github.com/owen/xatu/internal/ui/setup"
-	"github.com/owen/xatu/internal/ui/tile"
-	"github.com/owen/xatu/internal/ui/tiles"
+	xaws "github.com/owenps/xatu/internal/aws"
+	"github.com/owenps/xatu/internal/config"
+	logpkg "github.com/owenps/xatu/internal/log"
+	"github.com/owenps/xatu/internal/ui/query"
+	"github.com/owenps/xatu/internal/ui/settings"
+	"github.com/owenps/xatu/internal/ui/setup"
+	"github.com/owenps/xatu/internal/ui/tile"
+	"github.com/owenps/xatu/internal/ui/tiles"
 )
 
 // RunSetupMsg can be sent from any screen (e.g. settings) to re-launch the setup wizard.

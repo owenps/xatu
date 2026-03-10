@@ -2,23 +2,31 @@
 
 AWS Logs TUI written in GO
 
-## Getting Started
+## Install
 
-1. Download the latest binary for your platform from [Releases](../../releases)
-1. Ensure your AWS credentials are configured (`aws configure` or SSO)
-    - You'll need `logs:DescribeLogGroups`, `logs:FilterLogEvents` IAM permissions.
-1. Run `./xatu` — the setup wizard will walk you through selecting a region, log groups, and naming your first context
+Pick one:
 
-> [!TIP]
-> Move the binary to your PATH so you can run `xatu` from anywhere:
->```bash
->mv xatu /usr/local/bin/
->```
-
-You can re-run the setup wizard anytime with
 ```bash
-./xatu -setup
+# Option 1: Go install
+go install github.com/owenps/xatu@latest
+
+# Option 2: Download binary from Releases
+tar xzf xatu_darwin_arm64.tar.gz
+mv xatu /usr/local/bin/
+
+# Option 3: Build from source
+git clone https://github.com/owenps/xatu.git && cd xatu
+make build  # binary at bin/xatu
 ```
+
+## Setup
+
+1. Ensure your AWS credentials are configured (`aws configure` or SSO)
+2. Run `xatu` — the setup wizard will walk you through selecting a region, log groups, and naming your first context
+
+You'll need `logs:DescribeLogGroups` and `logs:FilterLogEvents` IAM permissions.
+
+Your configuration is saved to `~/.config/xatu/config.yaml`. Re-run the setup wizard anytime with `xatu --setup`.
 
 ## Usage
 
@@ -36,10 +44,26 @@ Contexts encapsulate different scopes so that you can toggle quickly between the
 1. `beta`, `prod` - two contexts, where all logs are for each environment
 1. `service A`, `service B`, `service C` -  three contexts, divide by logs by service
 1. `lambda`, `ecs-prod`, `ecs-test` - three contexts, divided by environment and service
-    
+
 </details>
 
-Use <kbd>shift</kbd> + <kbd>tab</kbd> to toggle between contexts.
+### Keybindings
+
+| Key | Action |
+| :--- | :--- |
+| <kbd>?</kbd> | Toggle help overlay |
+| <kbd>ctrl+c</kbd> | Quit |
+| <kbd>↑</kbd>/<kbd>↓</kbd> or <kbd>j</kbd>/<kbd>k</kbd> | Navigate / scroll |
+| <kbd>tab</kbd> | Cycle focus between tiles |
+| <kbd>shift+tab</kbd> | Switch context |
+| <kbd>enter</kbd> | Select / expand tile |
+| <kbd>esc</kbd> | Back / collapse / unfocus |
+| <kbd>r</kbd> | Refresh logs |
+| <kbd>h</kbd> | Home (dashboard) |
+| <kbd>q</kbd> | Query editor |
+| <kbd>cmd+,</kbd> | Settings |
+| <kbd>shift+enter</kbd> | Submit query |
+| <kbd>ctrl+s</kbd> | Save (in settings/query) |
 
 ## Costs
 
@@ -69,7 +93,7 @@ The following estimates are approximations for reference only.
 ## Development
 
 ```bash
-git clone <repo-url> && cd xatu
+git clone https://github.com/owenps/xatu.git && cd xatu
 make run        # run from source
 make build      # compile to bin/xatu
 make test       # run tests

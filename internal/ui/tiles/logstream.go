@@ -11,9 +11,9 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/owen/xatu/internal/aws"
-	logpkg "github.com/owen/xatu/internal/log"
-	"github.com/owen/xatu/internal/ui/tile"
+	"github.com/owenps/xatu/internal/aws"
+	logpkg "github.com/owenps/xatu/internal/log"
+	"github.com/owenps/xatu/internal/ui/tile"
 )
 
 // NewLogsMsg is sent when new log entries are fetched.
