@@ -54,6 +54,18 @@ var (
 	hintStyle     = lipgloss.NewStyle().Foreground(dimGreen)
 )
 
+func themedDelegate() list.DefaultDelegate {
+	delegate := list.NewDefaultDelegate()
+	delegate.Styles.SelectedTitle = delegate.Styles.SelectedTitle.Foreground(green).BorderForeground(green)
+	delegate.Styles.SelectedDesc = delegate.Styles.SelectedDesc.Foreground(green).BorderForeground(green)
+	delegate.Styles.NormalTitle = delegate.Styles.NormalTitle.Foreground(white)
+	delegate.Styles.NormalDesc = delegate.Styles.NormalDesc.Foreground(white)
+	delegate.Styles.DimmedTitle = delegate.Styles.DimmedTitle.Foreground(dimGreen)
+	delegate.Styles.DimmedDesc = delegate.Styles.DimmedDesc.Foreground(dimGreen)
+	delegate.Styles.FilterMatch = delegate.Styles.FilterMatch.Foreground(green)
+	return delegate
+}
+
 // regionItem for the region selector list.
 type regionItem string
 
@@ -81,6 +93,7 @@ func (i logGroupItem) FilterValue() string { return i.name }
 type discoverGroupsMsg struct {
 	groups []xaws.LogGroup
 	err    error
+	client *xaws.Client
 }
 
 type configSavedMsg struct {
@@ -118,13 +131,16 @@ func New(client *xaws.Client, region string) Model {
 	for i, r := range awsRegions {
 		items[i] = regionItem(r)
 	}
-	delegate := list.NewDefaultDelegate()
-	delegate.Styles.SelectedTitle = delegate.Styles.SelectedTitle.Foreground(green).BorderForeground(green)
-	delegate.Styles.NormalTitle = delegate.Styles.NormalTitle.Foreground(white)
+	delegate := themedDelegate()
 
 	regionList := list.New(items, delegate, 40, 20)
 	regionList.Title = "Select AWS Region"
 	regionList.Styles.Title = titleStyle
+	regionList.Styles.FilterPrompt = lipgloss.NewStyle().Foreground(green)
+	regionList.Styles.FilterCursor = lipgloss.NewStyle().Foreground(green)
+	regionList.Styles.DefaultFilterCharacterMatch = lipgloss.NewStyle().Foreground(green)
+	regionList.Styles.ActivePaginationDot = lipgloss.NewStyle().Foreground(green)
+	regionList.Styles.InactivePaginationDot = lipgloss.NewStyle().Foreground(dimGreen)
 	regionList.SetFilteringEnabled(true)
 	regionList.SetShowStatusBar(false)
 
@@ -246,6 +262,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 			m.step = stepRegion
 			return m, nil
 		}
+		m.client = msg.client
 		m.groups = msg.groups
 		m.step = stepSelectGroups
 
@@ -253,13 +270,16 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 		for i, g := range m.groups {
 			items[i] = logGroupItem{name: g.Name}
 		}
-		delegate := list.NewDefaultDelegate()
-		delegate.Styles.SelectedTitle = delegate.Styles.SelectedTitle.Foreground(green).BorderForeground(green)
-		delegate.Styles.NormalTitle = delegate.Styles.NormalTitle.Foreground(white)
+		delegate := themedDelegate()
 
 		m.groupList = list.New(items, delegate, m.width-4, m.height-6)
 		m.groupList.Title = "Select log groups"
 		m.groupList.Styles.Title = titleStyle
+		m.groupList.Styles.FilterPrompt = lipgloss.NewStyle().Foreground(green)
+		m.groupList.Styles.FilterCursor = lipgloss.NewStyle().Foreground(green)
+		m.groupList.Styles.DefaultFilterCharacterMatch = lipgloss.NewStyle().Foreground(green)
+		m.groupList.Styles.ActivePaginationDot = lipgloss.NewStyle().Foreground(green)
+		m.groupList.Styles.InactivePaginationDot = lipgloss.NewStyle().Foreground(dimGreen)
 		m.groupList.SetShowStatusBar(true)
 		m.groupList.SetFilteringEnabled(true)
 		return m, nil
@@ -333,11 +353,16 @@ func (m Model) selectionCount() int {
 }
 
 func (m Model) discoverGroups() tea.Cmd {
+	region := m.region
 	return func() tea.Msg {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
-		groups, err := m.client.DiscoverLogGroups(ctx)
-		return discoverGroupsMsg{groups: groups, err: err}
+		client, err := xaws.NewClient(ctx, region)
+		if err != nil {
+			return discoverGroupsMsg{err: err}
+		}
+		groups, err := client.DiscoverLogGroups(ctx)
+		return discoverGroupsMsg{groups: groups, err: err, client: client}
 	}
 }
 
