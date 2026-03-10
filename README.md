@@ -24,9 +24,9 @@ make build  # binary at bin/xatu
 1. Ensure your AWS credentials are configured (`aws configure` or SSO)
 2. Run `xatu` — the setup wizard will walk you through selecting a region, log groups, and naming your first context
 
-You'll need `logs:DescribeLogGroups` and `logs:FilterLogEvents` IAM permissions.
+You'll need `logs:DescribeLogGroups`, `logs:StartQuery`, `logs:GetQueryResults`, `logs:StopQuery`, and `logs:FilterLogEvents` IAM permissions.
 
-Your configuration is saved to `~/.config/xatu/config.yaml`. Re-run the setup wizard anytime with `xatu --setup`.
+Re-run the setup wizard anytime with `xatu --setup`.
 
 ## Usage
 
