@@ -55,7 +55,10 @@ var (
 )
 
 func themedDelegate() list.DefaultDelegate {
-	delegate := themedDelegate()
+	delegate := list.NewDefaultDelegate()
+	delegate.Styles.SelectedTitle = delegate.Styles.SelectedTitle.Foreground(green).BorderForeground(green)
+	delegate.Styles.SelectedDesc = delegate.Styles.SelectedDesc.Foreground(green).BorderForeground(green)
+	delegate.Styles.NormalTitle = delegate.Styles.NormalTitle.Foreground(white)
 	delegate.Styles.NormalDesc = delegate.Styles.NormalDesc.Foreground(white)
 	delegate.Styles.DimmedTitle = delegate.Styles.DimmedTitle.Foreground(dimGreen)
 	delegate.Styles.DimmedDesc = delegate.Styles.DimmedDesc.Foreground(dimGreen)
