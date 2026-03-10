@@ -9,8 +9,8 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/owen/xatu/internal/config"
-	"github.com/owen/xatu/internal/ui/shared"
+	"github.com/owenps/xatu/internal/config"
+	"github.com/owenps/xatu/internal/ui/shared"
 )
 
 // ConfigUpdatedMsg is sent when settings are saved.
@@ -316,7 +316,7 @@ func (m Model) renderPane() string {
 		out += titleStyle.Render("About") + "\n\n"
 		out += valueStyle.Render("  Version:  0.1.0") + "\n"
 		out += valueStyle.Render("  Author:   owen") + "\n"
-		out += labelStyle.Render("  Repo:") + " " + valueStyle.Render("github.com/owen/xatu") + "\n"
+		out += labelStyle.Render("  Repo:") + " " + valueStyle.Render("github.com/owenps/xatu") + "\n"
 		return out
 	}
 

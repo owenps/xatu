@@ -10,9 +10,9 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	xaws "github.com/owen/xatu/internal/aws"
-	"github.com/owen/xatu/internal/config"
-	"github.com/owen/xatu/internal/ui/shared"
+	xaws "github.com/owenps/xatu/internal/aws"
+	"github.com/owenps/xatu/internal/config"
+	"github.com/owenps/xatu/internal/ui/shared"
 )
 
 // AWS regions
