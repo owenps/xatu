@@ -81,6 +81,7 @@ func (i logGroupItem) FilterValue() string { return i.name }
 type discoverGroupsMsg struct {
 	groups []xaws.LogGroup
 	err    error
+	client *xaws.Client
 }
 
 type configSavedMsg struct {
@@ -246,6 +247,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 			m.step = stepRegion
 			return m, nil
 		}
+		m.client = msg.client
 		m.groups = msg.groups
 		m.step = stepSelectGroups
 
@@ -333,11 +335,16 @@ func (m Model) selectionCount() int {
 }
 
 func (m Model) discoverGroups() tea.Cmd {
+	region := m.region
 	return func() tea.Msg {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
-		groups, err := m.client.DiscoverLogGroups(ctx)
-		return discoverGroupsMsg{groups: groups, err: err}
+		client, err := xaws.NewClient(ctx, region)
+		if err != nil {
+			return discoverGroupsMsg{err: err}
+		}
+		groups, err := client.DiscoverLogGroups(ctx)
+		return discoverGroupsMsg{groups: groups, err: err, client: client}
 	}
 }
 
