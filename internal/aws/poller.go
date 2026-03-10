@@ -2,10 +2,12 @@ package aws
 
 import (
 	"context"
+	"errors"
 	"sort"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
+	cwltypes "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 )
 
 // FetchLogs retrieves log events from the given log groups within the time range.
@@ -28,6 +30,10 @@ func (c *Client) FetchLogs(ctx context.Context, logGroups []string, startTime, e
 
 			out, err := c.CWL.FilterLogEvents(ctx, input)
 			if err != nil {
+				var rnf *cwltypes.ResourceNotFoundException
+				if errors.As(err, &rnf) {
+					break // skip this log group, continue with others
+				}
 				return allEntries, err
 			}
 
