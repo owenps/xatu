@@ -1,10 +1,10 @@
 .PHONY: run build lint test clean
 
 run:
-	go run ./cmd/xatu
+	go run .
 
 build:
-	go build -o bin/xatu ./cmd/xatu
+	go build -o bin/xatu .
 
 lint:
 	golangci-lint run ./...
