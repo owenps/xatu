@@ -121,6 +121,7 @@ func New(client *xaws.Client, region string) Model {
 	}
 	delegate := list.NewDefaultDelegate()
 	delegate.Styles.SelectedTitle = delegate.Styles.SelectedTitle.Foreground(green).BorderForeground(green)
+	delegate.Styles.SelectedDesc = delegate.Styles.SelectedDesc.Foreground(green).BorderForeground(green)
 	delegate.Styles.NormalTitle = delegate.Styles.NormalTitle.Foreground(white)
 
 	regionList := list.New(items, delegate, 40, 20)
