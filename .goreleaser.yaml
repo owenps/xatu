@@ -1,7 +1,7 @@
 version: 2
 
 builds:
-  - main: ./cmd/xatu
+  - main: .
     binary: xatu
     ldflags:
       - -s -w
