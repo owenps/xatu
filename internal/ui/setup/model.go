@@ -157,7 +157,7 @@ func (m Model) Update(msg tea.Msg) (Model, tea.Cmd) {
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
 		m.height = msg.Height
-		m.regionList.SetSize(msg.Width-4, msg.Height-6)
+		m.regionList.SetSize(msg.Width-4, msg.Height-12)
 		if m.step == stepSelectGroups {
 			m.groupList.SetSize(msg.Width-4, msg.Height-6)
 		}
