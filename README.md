@@ -22,13 +22,17 @@ You can re-run the setup wizard anytime with
 
 ## Usage
 
+> [!IMPORTANT]
+> Use <kbd>?</kbd> from xatu to open the shortcuts reminders
+
 ### Contexts
 
 xatu contexts are a set of log groups. They may extend in the future to a wider set of configurations.
+Contexts encapsulate different scopes so that you can toggle quickly between them based on how you plan to use xatu.
 
 <details>
 <summary>Example context setups</summary>
-    
+
 1. `beta`, `prod` - two contexts, where all logs are for each environment
 1. `service A`, `service B`, `service C` -  three contexts, divide by logs by service
 1. `lambda`, `ecs-prod`, `ecs-test` - three contexts, divided by environment and service
