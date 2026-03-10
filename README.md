@@ -5,27 +5,25 @@ AWS Logs TUI written in GO
 ## Getting Started
 
 1. Download the latest binary for your platform from [Releases](../../releases)
-2. Ensure your AWS credentials are configured (`aws configure` or SSO)
-3. Run `./xatu` — the setup wizard will walk you through selecting a region, log groups, and naming your first context
+1. Ensure your AWS credentials are configured (`aws configure` or SSO)
+    - You'll need `logs:DescribeLogGroups`, `logs:FilterLogEvents` IAM permissions.
+1. Run `./xatu` — the setup wizard will walk you through selecting a region, log groups, and naming your first context
 
-Optionally, move the binary to your PATH so you can run `xatu` from anywhere:
+> [!TIP]
+> Move the binary to your PATH so you can run `xatu` from anywhere:
+>```bash
+>mv xatu /usr/local/bin/
+>```
 
-```bash
-mv xatu /usr/local/bin/
-```
-
-Your configuration is saved to `~/.config/xatu/config.yaml`. To re-run the setup wizard at any time:
-
+You can re-run the setup wizard anytime with
 ```bash
 ./xatu -setup
 ```
 
-### Required IAM Permissions
+## Data
 
-```
-logs:DescribeLogGroups
-logs:FilterLogEvents
-```
+- Log data is aggregated while xatu is running and cleaned once stopped.
+- All settings and preferences can be found at `~/.config/xatu/config.yaml`.
 
 ## Costs
 
