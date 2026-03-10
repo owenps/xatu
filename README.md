@@ -20,10 +20,22 @@ You can re-run the setup wizard anytime with
 ./xatu -setup
 ```
 
-## Data
+## Usage
 
-- Log data is aggregated while xatu is running and cleaned once stopped.
-- All settings and preferences can be found at `~/.config/xatu/config.yaml`.
+### Contexts
+
+xatu contexts are a set of log groups. They may extend in the future to a wider set of configurations.
+
+<details>
+<summary>Example context setups</summary>
+    
+1. `beta`, `prod` - two contexts, where all logs are for each environment
+1. `service A`, `service B`, `service C` -  three contexts, divide by logs by service
+1. `lambda`, `ecs-prod`, `ecs-test` - three contexts, divided by environment and service
+    
+</details>
+
+Use <kbd>shift</kbd> + <kbd>tab</kbd> to toggle between contexts.
 
 ## Costs
 
@@ -45,6 +57,11 @@ The following estimates are approximations for reference only.
 | Insights query | 1 GB scanned per query | $0.0057/query | varies |
 | LiveTail (not supported in xatu) | Per session | $0.60/hr | $4.80 |
 
+## Data
+
+- Log data is aggregated while xatu is running and cleaned once stopped.
+- All settings and preferences can be found at `~/.config/xatu/config.yaml`.
+
 ## Development
 
 ```bash
@@ -56,3 +73,7 @@ make lint       # run golangci-lint
 ```
 
 Requires Go 1.25+.
+
+## Thank you!
+
+If you want to support the project, please consider leaving a ⭐︎ on the repository!
