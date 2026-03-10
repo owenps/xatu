@@ -2,6 +2,9 @@
 
 AWS Logs TUI written in GO
 
+>[!CAUTION]
+> xatu is still in active development
+
 ## Install
 
 Pick one:
