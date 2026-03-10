@@ -1,4 +1,4 @@
-module github.com/owen/xatu
+module github.com/owenps/xatu
 
 go 1.25.4
 

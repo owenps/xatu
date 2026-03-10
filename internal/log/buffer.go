@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/owen/xatu/internal/aws"
+	"github.com/owenps/xatu/internal/aws"
 )
 
 // Buffer is a thread-safe ring buffer for log entries with deduplication.

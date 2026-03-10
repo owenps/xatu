@@ -8,8 +8,8 @@ import (
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	logpkg "github.com/owen/xatu/internal/log"
-	"github.com/owen/xatu/internal/ui/tile"
+	logpkg "github.com/owenps/xatu/internal/log"
+	"github.com/owenps/xatu/internal/ui/tile"
 )
 
 type patternItem struct {

@@ -13,8 +13,8 @@ import (
 	"github.com/charmbracelet/bubbles/textarea"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	xaws "github.com/owen/xatu/internal/aws"
-	"github.com/owen/xatu/internal/config"
+	xaws "github.com/owenps/xatu/internal/aws"
+	"github.com/owenps/xatu/internal/config"
 )
 
 // focus tracks which panel has focus.

@@ -3,7 +3,7 @@ package log
 import (
 	"strings"
 
-	"github.com/owen/xatu/internal/aws"
+	"github.com/owenps/xatu/internal/aws"
 )
 
 // ParseLevel extracts the log level from a message string.
