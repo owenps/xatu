@@ -49,7 +49,7 @@ func NewLogStream(buf *logpkg.Buffer) *LogStream {
 		{Title: "TIME", Width: 12},
 		{Title: "LEVEL", Width: 7},
 		{Title: "GROUP", Width: 20},
-		{Title: "MESSAGE", Width: 60},
+		{Title: "MESSAGE", Width: 58},
 	}
 
 	t := table.New(
@@ -132,8 +132,10 @@ func (l *LogStream) View() string {
 func (l *LogStream) SetSize(width, height int) {
 	l.width = width
 	l.height = height
+	l.table.SetWidth(width)
 	l.table.SetHeight(height)
 	l.recalcColumns()
+	l.refreshRows()
 }
 
 func (l *LogStream) Title() string {
@@ -165,10 +167,9 @@ func (l *LogStream) refreshRows() {
 	rows := make([]table.Row, len(entries))
 
 	for i, e := range entries {
-		levelStyle := lipgloss.NewStyle().Foreground(levelColors[e.Level])
 		rows[i] = table.Row{
 			e.Timestamp.Format(time.TimeOnly),
-			levelStyle.Render(e.Level.String()),
+			e.Level.String(),
 			truncate(e.LogGroup, 20),
 			truncate(e.Message, l.msgWidth()),
 		}
@@ -197,8 +198,8 @@ func (l *LogStream) recalcColumns() {
 }
 
 func (l *LogStream) msgWidth() int {
-	// TIME(12) + LEVEL(7) + GROUP(20) + gaps(6) = 45
-	w := l.width - 45
+	// TIME(12) + LEVEL(7) + GROUP(20) + padding(8) = 47
+	w := l.width - 47
 	if w < 10 {
 		w = 10
 	}
